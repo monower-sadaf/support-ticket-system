@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { RxDashboard } from "react-icons/rx";
 import { FiLogOut } from "react-icons/fi";
+import { Link } from "@inertiajs/inertia-react";
 
 const Sidebar = () => {
     const [hidden, setHidden] = useState(false);
@@ -107,9 +108,9 @@ const Sidebar = () => {
                     <p>John Doe</p>
                     <p>Super Admin</p>
                 </div>
-                <button>
+                <Link href="/logout">
                     <FiLogOut className="w-6 h-6 text-slate-600" />
-                </button>
+                </Link>
             </div>
         </div>
     );

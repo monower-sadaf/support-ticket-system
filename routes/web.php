@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,13 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
-Route::get('/login', function(){
-    return Inertia::render('Login');
-});
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
     return Inertia::render('Dashboard');
-});
+})->middleware(['auth', 'verified'])->name('home');
 
 
 Route::get('/project', [ProjectController::class, 'index'])->name('project.index');
