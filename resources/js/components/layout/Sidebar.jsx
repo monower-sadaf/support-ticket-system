@@ -6,9 +6,10 @@ import { Link } from "@inertiajs/inertia-react";
 
 const Sidebar = () => {
     const [hidden, setHidden] = useState(false);
+    /* sidebar width is 64 for testing. Later change it */
     return (
         <div
-            className={`min-h-screen flex flex-col justify-between w-64 transition-all duration-300 ease-in-out ${
+            className={`min-h-screen flex flex-col justify-between transition-all duration-300 ease-in-out w-64 ${
                 hidden ? "w-10" : "w-64"
             }`}
         >
@@ -25,76 +26,76 @@ const Sidebar = () => {
                 </div>
                 <ul className="flex flex-col gap-2">
                     <li>
-                        <a
-                            href="#"
+                        <Link
+                            href="/"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>Dashboard</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="/project"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>Projects</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="#"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>Teams</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="#"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>User Management</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="#"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>Tickets</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="#"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>Role Permissions</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="#"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>Logs</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="#"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
                             <RxDashboard />
                             <span>Settings</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </aside>

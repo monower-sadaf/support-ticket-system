@@ -1,4 +1,4 @@
-import Sidebar from "./Sidebar";
+import Sidebar from './Sidebar';
 const Layout = ({children}) => {
     return (
         <section className="flex 2xl:container 2xl:mx-auto">
