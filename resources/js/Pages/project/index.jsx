@@ -1,13 +1,14 @@
 import Layout from "../../components/layout/Layout";
+import { Link } from "@inertiajs/inertia-react";
 const Index = () => {
     return (
         <Layout>
             <div className="p-4">
                 <div className="flex justify-between items-center pb-5">
                     <h3 className="text-2xl font-semibold">Projects</h3>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded">
+                    <Link href="/project/create" className="bg-blue-500 text-white px-4 py-2 rounded">
                         Add new
-                    </button>
+                    </Link>
                 </div>
                 <div>
                     <div className="flex justify-end pb-3">pagination</div>

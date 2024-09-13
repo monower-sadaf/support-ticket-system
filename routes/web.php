@@ -20,9 +20,21 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::prefix('project')->group(function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+        Route::get('/create', [ProjectController::class, 'create'])->name('project.create');
+    });
+    
+});
+
+/* Route::get('/', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/project', [ProjectController::class, 'index'])->name('project.index');
+Route::get('/project', [ProjectController::class, 'index'])->name('project.index'); */
