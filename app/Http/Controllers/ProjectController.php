@@ -14,4 +14,8 @@ class ProjectController extends Controller
     public function create(){
         return Inertia::render('project/create');
     }
+
+    public function store(Request $request){
+        dd($request->all());
+    }
 }

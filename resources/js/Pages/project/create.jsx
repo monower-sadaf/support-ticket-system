@@ -1,6 +1,29 @@
+import { useState } from "react";
+import { router } from "@inertiajs/react";
 import Layout from "../../components/layout/Layout";
 import { Link } from "@inertiajs/inertia-react";
 const Create = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        description: "",
+        start_date: "",
+        end_date: "",
+        duration: "",
+        progress: "",
+        status: "",
+    });
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        router.post("/project/store", {
+            name: formData.name,
+            description: formData.description,
+            start_date: formData.start_date,
+            end_date: formData.end_date,
+            duration: formData.duration,
+            progress: formData.progress,
+            status: formData.status,
+        });
+    };
     return (
         <Layout>
             <div className="p-4">
@@ -13,92 +36,167 @@ const Create = () => {
                         Back to list
                     </Link>
                 </div>
-                <form action="">
-                    <div className="grid grid-cols-2 gap-4 pb-4">
-                        <div>
-                            <label
-                                htmlFor="name"
-                                className="block mb-2 text-sm font-medium text-slate-900"
-                            >
-                                Project Name
-                            </label>
-                            <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            />
+                <form onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 gap-4 pb-4">
+                        <div className="grid grid-cols-1 gap-4">
+                            <fieldset className="border border-slate-300 pl-2 rounded">
+                                <legend>
+                                    <label
+                                        htmlFor="name"
+                                        className="text-sm font-medium text-slate-900 px-2 bg-white after:content-['_*'] after:text-red-600"
+                                    >
+                                        Project Name
+                                    </label>
+                                </legend>
+                                <input
+                                    value={formData.name}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            name: e.target.value,
+                                        })
+                                    }
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    className="bg-slate-50 text-slate-900 text-sm w-full p-2 outline-none"
+                                    placeholder="Enter Project Name"
+                                    required
+                                />
+                            </fieldset>
+                            <fieldset className="border border-slate-300 pl-2 rounded">
+                                <legend>
+                                    <label
+                                        htmlFor="description"
+                                        className="text-sm font-medium text-slate-900 px-2 bg-white "
+                                    >
+                                        Project Description
+                                    </label>
+                                </legend>
+
+                                <textarea
+                                    value={formData.description}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            description: e.target.value,
+                                        })
+                                    }
+                                    name="description"
+                                    id="description"
+                                    className="bg-slate-50 text-slate-900 text-sm w-full p-2 outline-none"
+                                    placeholder="Enter Project Description"
+                                ></textarea>
+                            </fieldset>
                         </div>
-                        <div>
-                            <label
-                                htmlFor="description"
-                                className="block mb-2 text-sm font-medium text-slate-900"
-                            >
-                                Project Description
-                            </label>
-                            <textarea
-                                name="description"
-                                id="description"
-                                className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            ></textarea>
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="start_date"
-                                className="block mb-2 text-sm font-medium text-slate-900"
-                            >
-                                Start Date
-                            </label>
-                            <input
-                                type="date"
-                                name="start_date"
-                                id="start_date"
-                                className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="end_date"
-                                className="block mb-2 text-sm font-medium text-slate-900"
-                            >
-                                End Date
-                            </label>
-                            <input
-                                type="date"
-                                name="end_date"
-                                id="end_date"
-                                className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="progress"
-                                className="block mb-2 text-sm font-medium text-slate-900"
-                            >
-                                Project Progress
-                            </label>
-                            <input
-                                type="number"
-                                name="progress"
-                                id="progress"
-                                className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            />
-                        </div>
-                        <div>
-                            <label
-                                htmlFor="status"
-                                className="block mb-2 text-sm font-medium text-slate-900"
-                            >
-                                Project Status
-                            </label>
-                            <select
-                                name="status"
-                                id="status"
-                                className="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            >
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
+                        <div className="grid grid-cols-2 gap-4">
+                            <fieldset className="border border-slate-300 pl-2 rounded">
+                                <legend>
+                                    <label
+                                        htmlFor="start_date"
+                                        className="text-sm font-medium text-slate-900 px-2 bg-white"
+                                    >
+                                        Start Date
+                                    </label>
+                                </legend>
+
+                                <input
+                                    value={formData.start_date}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            start_date: e.target.value,
+                                        })
+                                    }
+                                    type="date"
+                                    name="start_date"
+                                    id="start_date"
+                                    className="bg-slate-50 text-sm rounded w-full p-2 outline-none text-gray-500"
+                                />
+                            </fieldset>
+                            <fieldset className="border border-slate-300 pl-2 rounded">
+                                <legend>
+                                    <label
+                                        htmlFor="end_date"
+                                        className="text-sm font-medium text-slate-900 px-2 bg-white"
+                                    >
+                                        End Date
+                                    </label>
+                                </legend>
+
+                                <input
+                                    value={formData.end_date}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            end_date: e.target.value,
+                                        })
+                                    }
+                                    type="date"
+                                    name="end_date"
+                                    id="end_date"
+                                    className="bg-slate-50 text-gray-500 text-sm rounded w-full p-2 outline-none"
+                                />
+                            </fieldset>
+                            <fieldset className="border border-slate-300 px-2 rounded">
+                                <legend>
+                                    <label
+                                        htmlFor="progress"
+                                        className="text-sm font-medium text-slate-900 px-2 bg-white"
+                                    >
+                                        Project Progress
+                                    </label>
+                                </legend>
+                                <select
+                                    name="progress"
+                                    className="w-full bg-slate-50 p-2 text-sm"
+                                    id="progress"
+                                    value={formData.progress}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            progress: e.target.value,
+                                        })
+                                    }
+                                >
+                                    <option value="0">Planning</option>
+                                    <option value="1">
+                                        Requirements Analysis
+                                    </option>
+                                    <option value="2">Design</option>
+                                    <option value="3">Development</option>
+                                    <option value="4">Testing</option>
+                                    <option value="5">Deployment</option>
+                                    <option value="6">Maintenance</option>
+                                    <option value="7">Completed</option>
+                                </select>
+                            </fieldset>
+                            <fieldset className="border border-slate-300 px-2 rounded">
+                                <legend>
+                                    <label
+                                        htmlFor="status"
+                                        className="block mb-2 text-sm font-medium text-slate-900"
+                                    >
+                                        Project Status
+                                    </label>
+                                </legend>
+
+                                <select
+                                    value={formData.status}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            status: e.target.value,
+                                        })
+                                    }
+                                    name="status"
+                                    id="status"
+                                    className="w-full bg-slate-50 p-2 text-sm"
+                                >
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </fieldset>
                         </div>
                     </div>
                     <div className="flex justify-end">
