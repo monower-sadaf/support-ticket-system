@@ -1,12 +1,15 @@
 import Layout from "../../components/layout/Layout";
 import { Link } from "@inertiajs/inertia-react";
-const Index = () => {
+const Index = ({ projects }) => {
     return (
         <Layout>
             <div className="p-4">
                 <div className="flex justify-between items-center pb-5">
                     <h3 className="text-2xl font-semibold">Projects</h3>
-                    <Link href="/project/create" className="bg-blue-500 text-white px-4 py-2 rounded">
+                    <Link
+                        href="/project/create"
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
                         Add new
                     </Link>
                 </div>
@@ -29,25 +32,34 @@ const Index = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr className="text-center h-8 border border-slate-600 [&>td]:border [&>td]:border-slate-600">
-                                    <td>1</td>
-                                    <td>demo name</td>
-                                    <td>demo Description</td>
-                                    <td>02/09/2024</td>
-                                    <td>02/09/2024</td>
-                                    <td>60</td>
-                                    <td>running</td>
-                                    <td>active</td>
-                                    <td>26/08/2024</td>
-                                    <td>
-                                        <button className="bg-blue-500 text-white px-2 py-1 rounded">
-                                            Edit
-                                        </button>
-                                        <button className="bg-red-500 text-white px-2 py-1 rounded">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
+                                {projects.map((project, index) => (
+                                    <tr
+                                        key={index}
+                                        className="text-center h-8 border border-slate-600 [&>td]:border [&>td]:border-slate-600"
+                                    >
+                                        <td>{index + 1}</td>
+                                        {/* <td>{project.id}</td> */}
+                                        <td>{project.name}</td>
+                                        <td>{project.description ?? "-"}</td>
+                                        <td>{project.start_date ?? "-"}</td>
+                                        <td>{project.end_date ?? "-"}</td>
+                                        <td>{project.duration ?? "-"}</td>
+                                        <td>{project.progress}</td>
+                                        <td>{project.status}</td>
+                                        <td>{project.created_at}</td>
+                                        <td>
+                                            <Link
+                                                href={`/project/edit/${project.id}`}
+                                                className="bg-blue-500 text-white px-2 py-1 rounded"
+                                            >
+                                                Edit
+                                            </Link>
+                                            <Link method="delete" href={`/project/delete/${project.id}`} className="bg-red-500 text-white px-2 py-1 rounded">
+                                                Delete
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

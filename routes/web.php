@@ -29,6 +29,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/', [ProjectController::class, 'index'])->name('project.index');
         Route::get('/create', [ProjectController::class, 'create'])->name('project.create');
         Route::post('/store', [ProjectController::class, 'store'])->name('project.store');
+        Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+        Route::put('/update/{id}', [ProjectController::class, 'update'])->name('project.update');
+        Route::delete('/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
     });
     
 });

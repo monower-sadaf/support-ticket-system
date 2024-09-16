@@ -2,19 +2,21 @@ import { useState } from "react";
 import { router } from "@inertiajs/react";
 import Layout from "../../components/layout/Layout";
 import { Link } from "@inertiajs/inertia-react";
-const Create = ({ errors }) => {
+const Edit = ({ project, errors }) => {
     const [formData, setFormData] = useState({
-        name: "",
-        description: "",
-        start_date: "",
-        end_date: "",
-        duration: "",
-        progress: 0,
-        status: 1,
+        name: project.name,
+        description: project.description,
+        start_date: project.start_date,
+        end_date: project.end_date,
+        duration: project.duration,
+        progress: project.progress,
+        status: project.status,
     });
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.post("/project/store", {
+        router.put(`/project/update/${project.id}`, {
             name: formData.name,
             description: formData.description,
             start_date: formData.start_date,
@@ -24,11 +26,12 @@ const Create = ({ errors }) => {
             status: formData.status,
         });
     };
+
     return (
         <Layout>
             <div className="p-4">
                 <div className="flex justify-between items-center pb-5">
-                    <h3 className="text-2xl font-semibold">Add New Project</h3>
+                    <h3 className="text-2xl font-semibold">Edit Project</h3>
                     <Link
                         href="/project"
                         className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -64,10 +67,11 @@ const Create = ({ errors }) => {
                                     required
                                 />
 
-                                { 
-
-                                    errors.name && <span className="text-red-600 text-sm">{errors.name}</span>
-                                }
+                                {errors.name && (
+                                    <span className="text-red-600 text-sm">
+                                        {errors.name}
+                                    </span>
+                                )}
                             </fieldset>
                             <fieldset className="border border-slate-300 pl-2 rounded">
                                 <legend>
@@ -209,7 +213,7 @@ const Create = ({ errors }) => {
                             type="submit"
                             className="bg-blue-500 text-white px-4 py-2 rounded"
                         >
-                            Save
+                            Update
                         </button>
                     </div>
                 </form>
@@ -217,5 +221,4 @@ const Create = ({ errors }) => {
         </Layout>
     );
 };
-
-export default Create;
+export default Edit;

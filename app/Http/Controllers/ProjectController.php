@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ProjectRequest;
+use App\Models\Project;
 
 class ProjectController extends Controller
 {
     public function index(){
-        return Inertia::render('project/index');
+        $projects = Project::all();
+        return Inertia::render('project/index', ['projects' => $projects]);
     }
 
     public function create(){
@@ -20,19 +21,27 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request){
 
         $request->validated();
+        $result = Project::create($request->all());
+        return redirect(route('project.index'));
+    }
 
-        dd($request->all());
 
-        
+    public function edit($id){
+        $project = Project::find($id);
+        return Inertia::render('project/edit', ['project' => $project]);
+    }
 
-        /* $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-        ]);
+    public function update(ProjectRequest $request, $id){
+        $request->validated();
+        $project = Project::find($id);
+        $project->update($request->all());
+        return redirect(route('project.index'));
+    }
 
-        if ($validator->fails()) {
-            return redirect(route('project.create'))
-                        ->withErrors($validator)
-                        ->withInput();
-        } */
+
+    public function destroy($id){
+        $project = Project::find($id);
+        $project->delete();
+        return redirect(route('project.index'));
     }
 }
