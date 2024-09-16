@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -15,7 +17,22 @@ class ProjectController extends Controller
         return Inertia::render('project/create');
     }
 
-    public function store(Request $request){
+    public function store(ProjectRequest $request){
+
+        $request->validated();
+
         dd($request->all());
+
+        
+
+        /* $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('project.create'))
+                        ->withErrors($validator)
+                        ->withInput();
+        } */
     }
 }

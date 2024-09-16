@@ -2,7 +2,7 @@ import { useState } from "react";
 import { router } from "@inertiajs/react";
 import Layout from "../../components/layout/Layout";
 import { Link } from "@inertiajs/inertia-react";
-const Create = () => {
+const Create = ({ errors }) => {
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -63,6 +63,11 @@ const Create = () => {
                                     placeholder="Enter Project Name"
                                     required
                                 />
+
+                                { 
+
+                                    errors.name && <span className="text-red-600 text-sm">{errors.name}</span>
+                                }
                             </fieldset>
                             <fieldset className="border border-slate-300 pl-2 rounded">
                                 <legend>
