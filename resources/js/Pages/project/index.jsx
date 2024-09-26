@@ -47,7 +47,10 @@ const Index = ({ projects }) => {
                                         <td>{project.progress}</td>
                                         <td>{project.status}</td>
                                         <td>{project.created_at}</td>
-                                        <td>
+                                        <td className="space-x-2">
+                                            <Link href={`/project/details/${project.id}`} className="bg-green-500 text-white px-2 py-1 rounded">
+                                                View
+                                            </Link>
                                             <Link
                                                 href={`/project/edit/${project.id}`}
                                                 className="bg-blue-500 text-white px-2 py-1 rounded"

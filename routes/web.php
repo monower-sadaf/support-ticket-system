@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
         Route::put('/update/{id}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
+        Route::get('/details/{id}', [ProjectController::class, 'show'])->name('project.show');
     });
     
 });

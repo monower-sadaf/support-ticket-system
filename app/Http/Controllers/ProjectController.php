@@ -44,4 +44,9 @@ class ProjectController extends Controller
         $project->delete();
         return redirect(route('project.index'));
     }
+
+    public function show($id){
+        $project = Project::find($id);
+        return Inertia::render('project/show', ['project' => $project]);
+    }
 }
