@@ -9,18 +9,18 @@ const Create = ({ errors }) => {
         start_date: "",
         end_date: "",
         duration: "",
-        progress: 0,
+        project_progress_id: 1,
         status: 1,
     });
     const handleSubmit = (e) => {
         e.preventDefault();
-        router.post("/project/store", {
+        router.post("/projects/store", {
             name: formData.name,
             description: formData.description,
             start_date: formData.start_date,
             end_date: formData.end_date,
             duration: formData.duration,
-            progress: formData.progress,
+            project_progress_id: formData.project_progress_id,
             status: formData.status,
         });
     };
@@ -30,7 +30,7 @@ const Create = ({ errors }) => {
                 <div className="flex justify-between items-center pb-5">
                     <h3 className="text-2xl font-semibold">Add New Project</h3>
                     <Link
-                        href="/project"
+                        href="/projects"
                         className="bg-blue-500 text-white px-4 py-2 rounded"
                     >
                         Back to list
@@ -64,10 +64,11 @@ const Create = ({ errors }) => {
                                     required
                                 />
 
-                                { 
-
-                                    errors.name && <span className="text-red-600 text-sm">{errors.name}</span>
-                                }
+                                {errors.name && (
+                                    <span className="text-red-600 text-sm">
+                                        {errors.name}
+                                    </span>
+                                )}
                             </fieldset>
                             <fieldset className="border border-slate-300 pl-2 rounded">
                                 <legend>
@@ -146,34 +147,33 @@ const Create = ({ errors }) => {
                             <fieldset className="border border-slate-300 px-2 rounded">
                                 <legend>
                                     <label
-                                        htmlFor="progress"
+                                        htmlFor="project_progress_id"
                                         className="text-sm font-medium text-slate-900 px-2 bg-white"
                                     >
                                         Project Progress
                                     </label>
                                 </legend>
                                 <select
-                                    name="progress"
+                                    name="project_progress_id"
                                     className="w-full bg-slate-50 p-2 text-sm"
-                                    id="progress"
-                                    value={formData.progress}
+                                    id="project_progress_id"
+                                    value={formData.project_progress_id}
                                     onChange={(e) =>
                                         setFormData({
                                             ...formData,
-                                            progress: e.target.value,
+                                            project_progress_id: e.target.value,
                                         })
                                     }
                                 >
-                                    <option value="0">Planning</option>
-                                    <option value="1">
+                                    <option value="1">Planning</option>
+                                    <option value="2">
                                         Requirements Analysis
                                     </option>
-                                    <option value="2">Design</option>
-                                    <option value="3">Development</option>
-                                    <option value="4">Testing</option>
-                                    <option value="5">Deployment</option>
+                                    <option value="3">Design</option>
+                                    <option value="4">Development</option>
+                                    <option value="5">Testing</option>
                                     <option value="6">Maintenance</option>
-                                    <option value="7">Completed</option>
+                                    <option value="7">Evaluation</option>
                                 </select>
                             </fieldset>
                             <fieldset className="border border-slate-300 px-2 rounded">
@@ -204,13 +204,19 @@ const Create = ({ errors }) => {
                             </fieldset>
                         </div>
                     </div>
-                    <div className="flex justify-end">
+                    <div className="flex justify-end gap-2">
                         <button
                             type="submit"
                             className="bg-blue-500 text-white px-4 py-2 rounded"
                         >
                             Save
                         </button>
+                        <Link
+                            href="/projects"
+                            className="bg-red-500 text-white px-4 py-2 rounded"
+                        >
+                            Cancel
+                        </Link>
                     </div>
                 </form>
             </div>

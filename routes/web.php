@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::prefix('project')->group(function () {
+    Route::prefix('projects')->group(function () {
         Route::get('/', [ProjectController::class, 'index'])->name('project.index');
         Route::get('/create', [ProjectController::class, 'create'])->name('project.create');
         Route::post('/store', [ProjectController::class, 'store'])->name('project.store');

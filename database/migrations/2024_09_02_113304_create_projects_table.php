@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->integer('duration')->nullable();
-            $table->integer('progress');
+            $table->foreignId('project_progress_id')->default(1);
             $table->integer('status');
             $table->timestamps();
         });

@@ -10,7 +10,7 @@ use App\Models\Project;
 class ProjectController extends Controller
 {
     public function index(){
-        $projects = Project::all();
+        $projects = Project::with('project_progress')->get();
         return Inertia::render('project/index', ['projects' => $projects]);
     }
 
@@ -19,7 +19,6 @@ class ProjectController extends Controller
     }
 
     public function store(ProjectRequest $request){
-
         $request->validated();
         $result = Project::create($request->all());
         return redirect(route('project.index'));
@@ -27,7 +26,7 @@ class ProjectController extends Controller
 
 
     public function edit($id){
-        $project = Project::find($id);
+        $project = Project::with('project_progress')->find($id);
         return Inertia::render('project/edit', ['project' => $project]);
     }
 
@@ -46,7 +45,7 @@ class ProjectController extends Controller
     }
 
     public function show($id){
-        $project = Project::find($id);
+        $project = Project::with('project_progress')->find($id);
         return Inertia::render('project/show', ['project' => $project]);
     }
 }

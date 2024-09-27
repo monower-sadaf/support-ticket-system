@@ -15,7 +15,12 @@ class Project extends Model
         "start_date",
         "end_date",
         "duration",
-        "progress",
+        "project_progress_id",
         "status"
     ];
+
+    public function project_progress()
+    {
+        return $this->belongsTo(ProjectProgress::class);
+    }
 }

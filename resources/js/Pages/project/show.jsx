@@ -1,12 +1,84 @@
 import Layout from "../../components/layout/Layout";
+import { Link } from "@inertiajs/inertia-react";
 const Show = ({ project }) => {
     return (
         <Layout>
             <div className="p-4">
                 <div className="flex justify-between items-center pb-5">
-                    <h3 className="text-2xl font-semibold">Project</h3>
+                    <h3 className="text-2xl font-semibold">Project Details</h3>
+                    <Link
+                        href="/projects"
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                        Back to list
+                    </Link>
                 </div>
-                <div>
+                <div className="p-4 bg-slate-200 rounded">
+                    <div className="flex justify-end gap-2">
+                        <Link
+                            href={`/projects/edit/${project.id}`}
+                            className="bg-blue-500 text-white px-2 py-1 rounded"
+                        >
+                            Edit
+                        </Link>
+                        <Link
+                            method="delete"
+                            href={`/projects/delete/${project.id}`}
+                            className="bg-red-500 text-white px-2 py-1 rounded"
+                        >
+                            Delete
+                        </Link>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            ID: {project.id}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            Name: {project.name}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            Description: {project.description}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            Start Date: {project.start_date}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            End Date: {project.end_date}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            Duration: {project.duration}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            Progress: {project.project_progress.name}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            Status: {project.status == 1 ? "Active" : "Inactive"}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">
+                            Added on: {project.created_at}
+                        </h3>
+                    </div>
+                    <div className="flex justify-between items-center pb-3">
+                        <h3 className="text-xl font-semibold">Attachments:</h3>
+                    </div>
+                </div>
+                {/* <div>
                     <div className="flex justify-end pb-3">pagination</div>
                     <div className="overflow-x-auto">
                         <table className="w-full border border-slate-600">
@@ -38,7 +110,7 @@ const Show = ({ project }) => {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> */}
             </div>
         </Layout>
     );
