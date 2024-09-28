@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::put('/update/{id}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('/delete/{id}', [ProjectController::class, 'destroy'])->name('project.delete');
         Route::get('/details/{id}', [ProjectController::class, 'show'])->name('project.show');
+    });
+
+    Route::prefix('departments')->group(function () {
+        Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
     });
     
 });

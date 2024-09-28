@@ -4,6 +4,7 @@ import { RxDashboard } from "react-icons/rx";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "@inertiajs/inertia-react";
 import { IoCodeWorkingSharp } from "react-icons/io5";
+import { FaUsers } from "react-icons/fa";
 
 const Sidebar = () => {
     const [hidden, setHidden] = useState(false);
@@ -46,11 +47,11 @@ const Sidebar = () => {
                     </li>
                     <li>
                         <Link
-                            href="#"
+                            href="/departments"
                             className="flex items-center gap-2 bg-slate-300 p-1 pl-2 rounded text-slate-900"
                         >
-                            <RxDashboard />
-                            <span>Teams</span>
+                            <FaUsers />
+                            <span>Departments</span>
                         </Link>
                     </li>
                     <li>
