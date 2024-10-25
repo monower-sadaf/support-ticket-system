@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::prefix('departments')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
+        Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
+        Route::post('/store', [DepartmentController::class, 'store'])->name('department.store');
     });
     
 });

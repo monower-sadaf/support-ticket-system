@@ -11,7 +11,10 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        return Inertia::render('department/index');
+        $departments = Department::all();
+        return Inertia::render('department/index', [
+            'departments' => $departments
+        ]);
     }
 
     public function create()
@@ -20,17 +23,19 @@ class DepartmentController extends Controller
     }
 
     public function store(DepartmentRequest $request)
-    {
+    {   
+        $request->validated();
+
         $department = new Department();
         $department->name = $request->name;
         $department->save();
-        return redirect('/department');
+        return redirect('/departments');
     }
 
     public function edit($id)
     {
         $department = Department::find($id);
-        return Inertia::render('department/edit', [
+        return Inertia::render('departments/edit', [
             'department' => $department
         ]);
     }
@@ -40,7 +45,7 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         $department->name = $request->name;
         $department->save();
-        return redirect('/department');
+        return redirect('/departments');
     }
 
 
@@ -48,7 +53,7 @@ class DepartmentController extends Controller
     {
         $department = Department::find($id);
         $department->delete();
-        return redirect('/department');
+        return redirect('/departments');
     }
 
 
